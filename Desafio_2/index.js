@@ -9,7 +9,7 @@ while (opcion !== 0) {
             mostrarImpuestos();
             break;
         case 2:
-            let compra = parseFloat(prompt("Ingrese monto a comprar: "));
+            let compra = parseFloat(prompt("Ingrese monto a comprar: \nMontos superiores a 10000 dan un descuento del 10%"));
             alert("El total de su compra es: $" + calcularCompra(compra));
             break;
         case 0:
@@ -28,6 +28,13 @@ function mostrarImpuestos(){
 }
 
 function calcularCompra(compra){
-    let total = precioOficial * compra * impuestos;
+    let total;
+
+    if (compra < 10000) {
+        total = precioOficial * compra * impuestos;
+    } else {
+        total = (precioOficial * compra * impuestos)*0.90;
+    }
+     
     return total;
 }
