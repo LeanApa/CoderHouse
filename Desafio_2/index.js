@@ -8,7 +8,6 @@ while (opcion !== 0) {
         case 1:
             mostrarImpuestos();
             break;
-    
         case 2:
             let compra = parseFloat(prompt("Ingrese monto a comprar: "));
             alert("El total de su compra es: $" + calcularCompra(compra));
