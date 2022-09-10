@@ -69,7 +69,6 @@ function verCarrito(){
 }
 
 function agregarAlCarrito(compra){
-    console.log(compra);
     let productoComprado = productos.find(item => item.tipo === compra);
     alert("Se agregará: " + productoComprado.tipo + " al carrito")
     alert("Precio: $"+ productoComprado.precio);
