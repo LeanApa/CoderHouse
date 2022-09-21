@@ -16,62 +16,80 @@ let productos = [
     new Producto(2,"Remera Puma",1500),
     new Producto(3,"Jean Wrangler",3000),
     new Producto(4,"Campera",5600),
-    new Producto(5,"Zapatillas",800)
+    new Producto(5,"Zapatillas",800),
+    new Producto(6,"Crocs",5000)
 ];
 
-opcion = parseInt(prompt("Ingrese una de las siguientes opciones: \n1- Mostrar productos \n2- Sumar un producto al carrito \n3- Calcular total de compra \n4- Ver Carrito \n0- Salir"));
+mostrarProductos();
+productos.forEach((item)=>{
 
-while (opcion !== 0) {
-    
-    switch (opcion) {
-        case 1:
-            mostrarProductos();
-            break;
-        case 2:
-            let compra = prompt("Ingrese producto a comprar: \nMontos superiores a 10000 dan un descuento del 10%");
-            agregarAlCarrito(compra); 
-             break;
-         case 3:
-            alert("El total de su compra es: $" + calcularCompra(carrito));
-            break;
-        case 4:
-            verCarrito();
-            break; 
-        case 0:
-             alert("Gracias por usar nuestro servicio");
-            break; 
-        default:
-            alert("Ingrese una opción válida");
-    }
+    let boton = document.getElementById(item.id);
+    boton.onclick = () => agregarAlCarrito(item.id);
+}) 
 
-    opcion = parseInt(prompt("Ingrese una de las siguientes opciones: \n1- Mostrar productos \n2- Sumar un producto al carrito \n3- Calcular total de compra \n4- Ver Carrito \n0- Salir"));
-}
+let botonCarrito = document.getElementById("verProductos");
+botonCarrito.onclick = () => verCarrito();
+   /*  boton.onclick = () => alert(boton.id) */
 
-alert("Gracias por usar nuestro servicio");
+
 
 
 function mostrarProductos(){
     productos.forEach(item => {
-        let mensaje = `${item.tipo} Precio: $${item.precio}`
-        alert(mensaje);
+
+        let contenedor = document.createElement("div");
+        contenedor.className = "col-6"
+        let producto = document.getElementById("productos");
+        
+        contenedor.innerHTML = `<div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${item.tipo}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">${item.tipo}</h6>
+                                        <p class="card-text">Precio: ${item.precio}</p>
+                                        <button class="btn btn-primary" id="${item.id}" type="button">Agregar</button>
+                                    </div>
+                                </div>`;
+        
+        producto.appendChild(contenedor);
     })
 }
 
 function verCarrito(){
+    let reset = document.getElementsByClassName("item-carrito");
+    console.log(reset.length)
+
+    
+    // Por alguna razón, no borra el primer elemento de la coleccion
+        for (let item of reset) {
+            console.log(item)
+            item.remove();
+        }
+
     if(carrito.length !== 0){
+        
+        
         carrito.forEach(item => {
-            let mensaje = `${item.tipo} Precio: $${item.precio}`
-            alert(mensaje);
+            let contenedor = document.createElement("div");
+            contenedor.className = "col-6 item-carrito"
+            let producto = document.getElementById("carrito");
+            contenedor.innerHTML = `<div class="card " style="width: 18rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${item.tipo}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">${item.tipo}</h6>
+                                            <p class="card-text">Precio: ${item.precio}</p>
+                                        </div>
+                                    </div>`;
+            
+            producto.appendChild(contenedor);
         })
+    console.log(carrito);
     }else{
         alert("No tiene productos en el carrito")
     }
 }
 
-function agregarAlCarrito(compra){
-    let productoComprado = productos.find(item => item.tipo === compra);
-    alert("Se agregará: " + productoComprado.tipo + " al carrito")
-    alert("Precio: $"+ productoComprado.precio);
+function agregarAlCarrito(idProducto){
+    let productoComprado = productos.find(item => item.id === parseInt(idProducto));
     carrito.push(productoComprado);
     
 }
