@@ -55,22 +55,16 @@ function mostrarProductos(){
 }
 
 function verCarrito(){
-    let reset = document.getElementsByClassName("item-carrito");
-    console.log(reset.length)
 
-    
-    // Por alguna razón, no borra el primer elemento de la coleccion
-        for (let item of reset) {
-            console.log(item)
-            item.remove();
-        }
+    let reset = document.getElementById("carrito");
+    reset.innerHTML= "";
 
     if(carrito.length !== 0){
         
         
         carrito.forEach(item => {
             let contenedor = document.createElement("div");
-            contenedor.className = "col-6 item-carrito"
+            contenedor.className = "col-6"
             let producto = document.getElementById("carrito");
             contenedor.innerHTML = `<div class="card " style="width: 18rem;">
                                         <div class="card-body">
