@@ -7,10 +7,8 @@ class Producto{
     }
 
 }
-
 let costoCompras = 0;
 let carrito = [];
-
 let productos = [
     new Producto(1,"Remera Nike",1000),
     new Producto(2,"Remera Puma",1500),
@@ -19,21 +17,24 @@ let productos = [
     new Producto(5,"Zapatillas",800),
     new Producto(6,"Crocs",5000)
 ];
+let botonCarrito = document.getElementById("verProductos");
 
 mostrarProductos();
 productos.forEach((item)=>{
 
     let boton = document.getElementById(item.id);
     boton.onclick = () => agregarAlCarrito(item.id);
-}) 
+}); 
 
-let botonCarrito = document.getElementById("verProductos");
 botonCarrito.onclick = () => verCarrito();
-   /*  boton.onclick = () => alert(boton.id) */
 
 
 
 
+
+
+
+//area de funciones
 function mostrarProductos(){
     productos.forEach(item => {
 
