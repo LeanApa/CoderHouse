@@ -8,7 +8,6 @@ class Producto{
 
 }
 let costoCompras = 0;
-let carrito = [];
 let productos = [
     new Producto(1,"Remera Nike",1000),
     new Producto(2,"Remera Puma",1500),
@@ -17,16 +16,10 @@ let productos = [
     new Producto(5,"Zapatillas",800),
     new Producto(6,"Crocs",5000)
 ];
-let botonCarrito = document.getElementById("verProductos");
+let botonEliminarCarrito = document.getElementById("eliminarCarrito");
 
 mostrarProductos();
-productos.forEach((item)=>{
-
-    let boton = document.getElementById(item.id);
-    boton.onclick = () => agregarAlCarrito(item.id);
-}); 
-
-botonCarrito.onclick = () => verCarrito();
+botonEliminarCarrito.onclick = () => eliminarCarrito();
 
 
 
@@ -47,23 +40,26 @@ function mostrarProductos(){
                                         <h5 class="card-title">${item.tipo}</h5>
                                         <h6 class="card-subtitle mb-2 text-muted">${item.tipo}</h6>
                                         <p class="card-text">Precio: ${item.precio}</p>
-                                        <button class="btn btn-primary" id="${item.id}" type="button">Agregar</button>
+                                        <button class="btn btn-primary" id="agregar${item.id}" type="button">Agregar</button>
                                     </div>
                                 </div>`;
         
         producto.appendChild(contenedor);
+        let boton = document.getElementById(`agregar${item.id}`);
+        boton.onclick = () => agregarAlCarrito(item.id);
     })
 }
 
 function verCarrito(){
 
     let reset = document.getElementById("carrito");
+    let carritoLocal = JSON.parse(localStorage.getItem("carrito"));
     reset.innerHTML= "";
 
-    if(carrito.length !== 0){
+    if(carritoLocal.length !== 0){
         
         
-        carrito.forEach(item => {
+        carritoLocal.forEach(item => {
             let contenedor = document.createElement("div");
             contenedor.className = "col-6"
             let producto = document.getElementById("carrito");
@@ -72,21 +68,40 @@ function verCarrito(){
                                             <h5 class="card-title">${item.tipo}</h5>
                                             <h6 class="card-subtitle mb-2 text-muted">${item.tipo}</h6>
                                             <p class="card-text">Precio: ${item.precio}</p>
+                                            <button class="btn btn-danger" id="eliminar${item.id}" type="button">Eliminar</button>
                                         </div>
                                     </div>`;
             
-            producto.appendChild(contenedor);
+            producto.append(contenedor);
+            let boton = document.getElementById(`eliminar${item.id}`);
+            boton.onclick = () => eliminarProducto(item.id);
         })
     console.log(carrito);
-    }else{
-        alert("No tiene productos en el carrito")
     }
 }
 
 function agregarAlCarrito(idProducto){
     let productoComprado = productos.find(item => item.id === parseInt(idProducto));
+    let carrito = localStorage.getItem("carrito") === null ? [] : JSON.parse(localStorage.getItem("carrito"));
+
     carrito.push(productoComprado);
-    
+    localStorage.setItem("carrito",JSON.stringify(carrito)) ;
+    verCarrito();   
+}
+
+function eliminarCarrito(){
+    let producto = document.getElementById("carrito");
+    producto.innerHTML = "";
+    localStorage.clear();
+}
+
+function eliminarProducto(idProducto){
+    let carrito = localStorage.getItem("carrito") === null ? [] : JSON.parse(localStorage.getItem("carrito"));
+    let nuevoCarrito = carrito.filter((item) => item.id !== idProducto);
+    console.log(nuevoCarrito);
+    localStorage.clear();
+    localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
+    verCarrito();
 }
 
 function calcularCompra(carrito){

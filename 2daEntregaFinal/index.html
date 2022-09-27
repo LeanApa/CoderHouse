@@ -7,14 +7,21 @@
 
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <title>Desafio_5</title>
+    <title>2da entrega final</title>
 </head>
 <body>
-    <header>
-        <h1>Desafio_5</h1>
+    <header class="container-fluid">
+        <nav class="navbar bg-light">
+            <div class="container">
+              <a class="navbar-brand" href="#">
+                <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                <span class="ms-5 p-4">2da entrega final</span>    
+              </a>
+            </div>
+          </nav>
     </header>
    
-    <main>
+    <main class="container">
         <section >
             <h2>Productos</h2>
             <div class="row" id="productos">
@@ -24,14 +31,14 @@
         </section>
         <section>
             <h2>Mis Productos</h2>
-            <button class="btn btn-primary" id="verProductos" type="button">Ver productos</button>
+            <button class="btn btn-primary" id="eliminarCarrito" type="button">Vaciar Carrito</button>
             <div class="row" id="carrito">
 
             </div>
         </section>
     </main>
 
-    <footer>
+    <footer class="container">
         <small>Leandro Apablaza - CoderHouse 2022</small>
     </footer>
     <script src="index.js"></script>
