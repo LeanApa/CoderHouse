@@ -99,7 +99,6 @@ function eliminarProducto(idProducto){
     let carrito = localStorage.getItem("carrito") === null ? [] : JSON.parse(localStorage.getItem("carrito"));
     let nuevoCarrito = carrito.filter((item) => item.id !== idProducto);
     console.log(nuevoCarrito);
-    localStorage.clear();
     localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
     verCarrito();
 }
