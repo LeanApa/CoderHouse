@@ -19,6 +19,7 @@ let productos = [
 let botonEliminarCarrito = document.getElementById("eliminarCarrito");
 
 mostrarProductos();
+verCarrito();
 botonEliminarCarrito.onclick = () => eliminarCarrito();
 
 
@@ -27,7 +28,7 @@ botonEliminarCarrito.onclick = () => eliminarCarrito();
 
 
 
-//area de funciones
+//--------------------------------------area de funciones-----------------------------------------------
 function mostrarProductos(){
     productos.forEach(item => {
 
