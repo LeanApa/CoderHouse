@@ -89,7 +89,9 @@ function agregarAlCarrito(idProducto){
     let seEncuentraEnCarrito = false;
     //reviso que no se encuentre el producto ya agregado
     carrito.forEach((item)=>{
-        seEncuentraEnCarrito = item.id === productoComprado.id ? true : "" ;
+       if( item.id === productoComprado.id){
+        seEncuentraEnCarrito = true;
+       } 
     });
     seEncuentraEnCarrito ? "" : carrito.push(productoComprado);
     console.log(carrito);
