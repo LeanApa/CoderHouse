@@ -149,6 +149,20 @@ function eliminarProducto(idProducto){
     console.log(nuevoCarrito);
     localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
     verCarrito();
+    Toastify({
+        text: "Se elimino el producto del carrito",
+        duration: 3000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top",
+        position: "right", 
+        stopOnFocus: true, 
+        style: {
+          background: "linear-gradient(to right, #ff5050, #ff8080)",
+        },
+        onClick: function(){} 
+      }).showToast();
 }
 
 function calcularCompra(carrito){
