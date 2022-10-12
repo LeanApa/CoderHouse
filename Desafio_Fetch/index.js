@@ -82,7 +82,10 @@ function verCarrito(){
     }
 }
 
-function agregarAlCarrito(idProducto){
+async function agregarAlCarrito(idProducto){
+    const response = await fetch("./productos.json");
+    const productos = await response.json();
+
     let productoComprado = productos.find(item => item.id === parseInt(idProducto));
     let carrito = localStorage.getItem("carrito") === null ? [] : JSON.parse(localStorage.getItem("carrito"));
     let seEncuentraEnCarrito = false;
