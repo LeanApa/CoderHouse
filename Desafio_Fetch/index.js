@@ -8,14 +8,7 @@ class Producto{
 
 }
 let costoCompras = 0;
-/* let productos = [
-    new Producto(1,"Remera Nike",1000),
-    new Producto(2,"Remera Puma",1500),
-    new Producto(3,"Jean Wrangler",3000),
-    new Producto(4,"Campera",5600),
-    new Producto(5,"Zapatillas",800),
-    new Producto(6,"Crocs",5000)
-]; */
+
 let botonEliminarCarrito = document.getElementById("eliminarCarrito");
 
 mostrarProductos();
