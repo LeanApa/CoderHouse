@@ -1,0 +1,30 @@
+[
+    {
+        "id":1,
+        "tipo":"Remera Nike",
+        "precio":1000
+    },
+    {
+        "id":2,
+        "tipo":"Remera Puma",
+        "precio":1500
+    },
+    {
+        "id":3,
+        "tipo":"Jean Wrangler",
+        "precio":3000},
+    {
+        "id":4,
+        "tipo":"Campera",
+        "precio":5600},
+    {
+        "id":5,
+        "tipo":"Zapatillas",
+        "precio":800
+    },
+    {
+        "id":6,
+        "tipo":"Crocs",
+        "precio":5000
+    }
+]
