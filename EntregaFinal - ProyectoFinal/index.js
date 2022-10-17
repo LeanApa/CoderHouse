@@ -51,7 +51,7 @@ function verCarrito(){
     let carritoLocal = JSON.parse(localStorage.getItem("carrito"));
     
 
-    if(carritoLocal.length !== 0){
+    if(carritoLocal !== null){
         
         
         carritoLocal.forEach(item => {
@@ -73,6 +73,7 @@ function verCarrito(){
         })
     console.log(carrito);
     }
+    calcularCompra(carritoLocal);
 }
 
 async function agregarAlCarrito(idProducto){
@@ -136,6 +137,7 @@ function eliminarCarrito(){
         showConfirmButton: false,
         timer: 1000
       });
+    verCarrito();
 }
 
 function eliminarProducto(idProducto){
@@ -162,17 +164,32 @@ function eliminarProducto(idProducto){
 
 function calcularCompra(carrito){
     
+    let divCarrito = document.getElementById("totalCarrito");
     let total = 0;
-    if(carrito.length !== 0){
+    
+    
+    if(carrito !== null){
         carrito.forEach(item => total += item.precio)
         
         if (total > 10000) {
             total = total*0.90
         } 
+        divCarrito.innerHTML = `
+                            <div class="card p- ms-5 mt-1" style="width: 18rem;">
+                                <div class="card-body">
+                                <h5 class="card-title">Total Carrito</h5>
+                                <h6 class="card-subtitle my-2">Precio total de compra: $${total}</h6>
+                                </div>
+                            </div>`
     }else{
-        alert("No tiene productos en el carrito");
-        return 0;
+        divCarrito.innerHTML = `
+        <div class="card p- ms-5 mt-1" style="width: 18rem;">
+            <div class="card-body">
+            <h5 class="card-title">Total Carrito</h5>
+            <h6 class="card-subtitle my-2">Precio total de compra: $0</h6>
+            </div>
+        </div>`
     }
 
-    return total;
+    
 }
