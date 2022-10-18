@@ -7,17 +7,9 @@ class Producto{
     }
 
 }
-let costoCompras = 0;
 
-let botonEliminarCarrito = document.getElementById("eliminarCarrito");
-
-mostrarProductos();
-verCarrito();
-botonEliminarCarrito.onclick = () => eliminarCarrito();
-
-
-//--------------------------------------area de funciones-----------------------------------------------
-async function  mostrarProductos(){
+//--------------------------------------Inicio declaración de funciones-----------------------------------------------
+const mostrarProductos = async () => {
 
     const response = await fetch("./productos.json");
     const productos = await response.json();
@@ -43,7 +35,7 @@ async function  mostrarProductos(){
     })
 }
 
-function verCarrito(){
+const verCarrito = () => {
 
     let reset = document.getElementById("carrito");
     reset.innerHTML= "";
@@ -76,7 +68,7 @@ function verCarrito(){
     calcularCompra(carritoLocal);
 }
 
-async function agregarAlCarrito(idProducto){
+const agregarAlCarrito = async (idProducto) =>{
     const response = await fetch("./productos.json");
     const productos = await response.json();
 
@@ -126,7 +118,7 @@ async function agregarAlCarrito(idProducto){
     verCarrito();   
 }
 
-function eliminarCarrito(){
+const eliminarCarrito = () =>{
     let producto = document.getElementById("carrito");
     producto.innerHTML = "";
     localStorage.clear();
@@ -140,7 +132,7 @@ function eliminarCarrito(){
     verCarrito();
 }
 
-function eliminarProducto(idProducto){
+const eliminarProducto = (idProducto) =>{
     let carrito = localStorage.getItem("carrito") === null ? [] : JSON.parse(localStorage.getItem("carrito"));
     let nuevoCarrito = carrito.filter((item) => item.id !== idProducto);
     console.log(nuevoCarrito);
@@ -162,7 +154,7 @@ function eliminarProducto(idProducto){
       }).showToast();
 }
 
-function calcularCompra(carrito){
+const calcularCompra = (carrito) =>{
     
     let divCarrito = document.getElementById("totalCarrito");
     let total = 0;
@@ -193,3 +185,13 @@ function calcularCompra(carrito){
 
     
 }
+
+/* ---------------------------------------------------------- fin declaración de funciones------------------------------------------------------------------------ */
+let costoCompras = 0;
+let botonEliminarCarrito = document.getElementById("eliminarCarrito");
+
+mostrarProductos();
+verCarrito();
+botonEliminarCarrito.onclick = () => eliminarCarrito();
+
+
