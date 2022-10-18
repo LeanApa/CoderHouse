@@ -1,13 +1,3 @@
-class Producto{
-
-    constructor(id, tipo, precio){
-        this.id = id;
-        this.tipo = tipo;
-        this.precio = precio;
-    }
-
-}
-
 //--------------------------------------Inicio declaración de funciones-----------------------------------------------
 const mostrarProductos = async () => {
 
@@ -22,6 +12,7 @@ const mostrarProductos = async () => {
         
         contenedor.innerHTML = `<div class="card" style="width: 18rem;">
                                     <div class="card-body">
+                                        <img src="${item.img}" class="card-img-top card-img" alt="imagen de producto">
                                         <h5 class="card-title">${item.tipo}</h5>
                                         <h6 class="card-subtitle mb-2 text-muted">${item.tipo}</h6>
                                         <p class="card-text">Precio: ${item.precio}</p>
