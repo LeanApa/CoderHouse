@@ -158,10 +158,14 @@ const calcularCompra = (carrito) =>{
     
     let divCarrito = document.getElementById("totalCarrito");
     let total = 0;
+    let cantProductos = 0;
     
     
     if(carrito !== null){
-        carrito.forEach(item => total += item.precio)
+        carrito.forEach(item => {
+                            total += item.precio;
+                            cantProductos++;
+                        });
         
         if (total > 10000) {
             total = total*0.90
@@ -170,17 +174,21 @@ const calcularCompra = (carrito) =>{
                             <div class="card p- ms-5 mt-1" style="width: 18rem;">
                                 <div class="card-body">
                                 <h5 class="card-title">Total Carrito</h5>
-                                <h6 class="card-subtitle my-2">Precio total de compra: $${total}</h6>
+                                <small class="card-subtitle my-2 text-muted">Compras superiores a $10000 tienen un descuento del 10%.</small>
+                                <h6 class="card-text">Precio total de compra: $${total}</h6>
+                                <h6 class="card-text">Cantidad de productos: ${cantProductos}</h6>
                                 </div>
                             </div>`
     }else{
         divCarrito.innerHTML = `
-        <div class="card p- ms-5 mt-1" style="width: 18rem;">
-            <div class="card-body">
-            <h5 class="card-title">Total Carrito</h5>
-            <h6 class="card-subtitle my-2">Precio total de compra: $0</h6>
-            </div>
-        </div>`
+                            <div class="card p- ms-5 mt-1" style="width: 18rem;">
+                                <div class="card-body">
+                                <h5 class="card-title">Total Carrito</h5>
+                                <small class="card-subtitle my-2 text-muted">Compras superiores a $10000 tienen un descuento del 10%.</small>
+                                <h6 class="card-text">Precio total de compra: $0</h6>
+                                <h6 class="card-text">Cantidad de productos: ${cantProductos}</h6>
+                                </div>
+                            </div>`
     }
 
     
