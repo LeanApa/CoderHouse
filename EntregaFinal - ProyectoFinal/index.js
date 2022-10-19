@@ -3,14 +3,19 @@ const mostrarProductos = async () => {
 
     const response = await fetch("./productos.json");
     const productos = await response.json();
+    let vistaPrincipal = document.getElementById("vista-principal");
     let contadorCarrito = document.getElementById("contador_carrito");
+    let titulo = document.getElementById("titulo");
+    
+    vistaPrincipal.className = "col-12";
     const carritoLocal = JSON.parse(localStorage.getItem("carrito"));
+    titulo.innerHTML = "Productos";
     carritoLocal !== null ? contadorCarrito.innerHTML = `${carritoLocal.length}` : "";
 
     productos.forEach(item => {
 
         let contenedor = document.createElement("div");
-        contenedor.className = "col-6 p-1"
+        contenedor.className = "col-4 p-1"
         let producto = document.getElementById("productos");
         
         contenedor.innerHTML = `<div class="card" style="width: 18rem;">
@@ -33,10 +38,13 @@ const mostrarProductos = async () => {
 const verCarrito = () => {
 
     let reset = document.getElementById("productos");
-    reset.innerHTML= "";
-
+    let vistaPrincipal = document.getElementById("vista-principal");
     let carritoLocal = JSON.parse(localStorage.getItem("carrito"));
+    let titulo = document.getElementById("titulo");
     
+    titulo.innerHTML = "Carrito";
+    reset.innerHTML= "";
+    vistaPrincipal.className = "col-6";
 
     if(carritoLocal !== null){
         
