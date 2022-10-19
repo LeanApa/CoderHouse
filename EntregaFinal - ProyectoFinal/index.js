@@ -3,6 +3,9 @@ const mostrarProductos = async () => {
 
     const response = await fetch("./productos.json");
     const productos = await response.json();
+    let contadorCarrito = document.getElementById("contador_carrito");
+    const carritoLocal = JSON.parse(localStorage.getItem("carrito"));
+    carritoLocal !== null ? contadorCarrito.innerHTML = `${carritoLocal.length}` : "";
 
     productos.forEach(item => {
 
@@ -24,11 +27,12 @@ const mostrarProductos = async () => {
         let boton = document.getElementById(`agregar${item.id}`);
         boton.onclick = () => agregarAlCarrito(item.id);
     })
+    
 }
 
 const verCarrito = () => {
 
-    let reset = document.getElementById("carrito");
+    let reset = document.getElementById("productos");
     reset.innerHTML= "";
 
     let carritoLocal = JSON.parse(localStorage.getItem("carrito"));
@@ -40,7 +44,7 @@ const verCarrito = () => {
         carritoLocal.forEach(item => {
             let contenedor = document.createElement("div");
             contenedor.className = "col-6 p-1"
-            let producto = document.getElementById("carrito");
+            let producto = document.getElementById("productos");
             contenedor.innerHTML = `<div class="card " style="width: 18rem;">
                                         <div class="card-body">
                                             <h5 class="card-title">${item.tipo}</h5>
@@ -54,7 +58,6 @@ const verCarrito = () => {
             let boton = document.getElementById(`eliminar${item.id}`);
             boton.onclick = () => eliminarProducto(item.id);
         })
-    console.log(carrito);
     }
     calcularCompra(carritoLocal);
 }
@@ -62,6 +65,7 @@ const verCarrito = () => {
 const agregarAlCarrito = async (idProducto) =>{
     const response = await fetch("./productos.json");
     const productos = await response.json();
+    let contadorCarrito = document.getElementById("contador_carrito");
 
     let productoComprado = productos.find(item => item.id === parseInt(idProducto));
     let carrito = localStorage.getItem("carrito") === null ? [] : JSON.parse(localStorage.getItem("carrito"));
@@ -74,10 +78,10 @@ const agregarAlCarrito = async (idProducto) =>{
     });
     if(!seEncuentraEnCarrito){
         carrito.push(productoComprado);
+        contadorCarrito.innerHTML = `${carrito.length}`
         Toastify({
             text: "Producto agregado al carrito",
             duration: 3000,
-            destination: "https://github.com/apvarun/toastify-js",
             newWindow: true,
             close: true,
             gravity: "top",
@@ -92,7 +96,6 @@ const agregarAlCarrito = async (idProducto) =>{
         Toastify({
             text: "El producto ya se encuentra en el carrito",
             duration: 3000,
-            destination: "https://github.com/apvarun/toastify-js",
             newWindow: true,
             close: true,
             gravity: "top",
@@ -105,14 +108,15 @@ const agregarAlCarrito = async (idProducto) =>{
           }).showToast();
     }
     console.log(carrito);
-    localStorage.setItem("carrito",JSON.stringify(carrito)) ;
-    verCarrito();   
+    localStorage.setItem("carrito",JSON.stringify(carrito)) ;  
 }
 
 const eliminarCarrito = () =>{
-    let producto = document.getElementById("carrito");
+    let producto = document.getElementById("productos");
     producto.innerHTML = "";
+    let contadorCarrito = document.getElementById("contador_carrito");
     localStorage.clear();
+    contadorCarrito.innerHTML = `0`;
     Swal.fire({
         position: 'center',
         icon: 'success',
@@ -126,13 +130,14 @@ const eliminarCarrito = () =>{
 const eliminarProducto = (idProducto) =>{
     let carrito = localStorage.getItem("carrito") === null ? [] : JSON.parse(localStorage.getItem("carrito"));
     let nuevoCarrito = carrito.filter((item) => item.id !== idProducto);
+    let contadorCarrito = document.getElementById("contador_carrito");
+    contadorCarrito.innerHTML = `${nuevoCarrito.length}`;
     console.log(nuevoCarrito);
     localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
     verCarrito();
     Toastify({
         text: "Se elimino el producto del carrito",
         duration: 3000,
-        destination: "https://github.com/apvarun/toastify-js",
         newWindow: true,
         close: true,
         gravity: "top",
@@ -168,6 +173,7 @@ const calcularCompra = (carrito) =>{
                                 <small class="card-subtitle my-2 text-muted">Compras superiores a $10000 tienen un descuento del 10%.</small>
                                 <h6 class="card-text">Precio total de compra: $${total}</h6>
                                 <h6 class="card-text">Cantidad de productos: ${cantProductos}</h6>
+                                <button class="btn btn-primary m-2" id="eliminarCarrito" type="button">Vaciar Carrito</button>
                                 </div>
                             </div>`
     }else{
@@ -181,16 +187,15 @@ const calcularCompra = (carrito) =>{
                                 </div>
                             </div>`
     }
-
-    
+    const botonEliminarCarrito = document.getElementById("eliminarCarrito");
+    botonEliminarCarrito.onclick = () => eliminarCarrito();  
 }
 
 /* ---------------------------------------------------------- fin declaración de funciones------------------------------------------------------------------------ */
 let costoCompras = 0;
-let botonEliminarCarrito = document.getElementById("eliminarCarrito");
+const botonCarrito = document.getElementById("botonCarrito");
 
 mostrarProductos();
-verCarrito();
-botonEliminarCarrito.onclick = () => eliminarCarrito();
+botonCarrito.onclick = () => verCarrito();
 
 
