@@ -68,7 +68,11 @@ const verCarrito = () => {
             producto.append(contenedor);
             let boton = document.getElementById(`eliminar${item.id}`);
             boton.onclick = () => eliminarProducto(item.id);
-        })
+        })        
+    }else{
+        let aviso = document.createElement("p");
+        aviso.innerHTML = "Carrito vacío";
+        reset.append(aviso);
     }
     calcularCompra(carritoLocal);
 }
@@ -123,8 +127,6 @@ const agregarAlCarrito = async (idProducto) =>{
 }
 
 const eliminarCarrito = () =>{
-    let producto = document.getElementById("productos");
-    producto.innerHTML = "";
     let contadorCarrito = document.getElementById("contador_carrito");
     localStorage.clear();
     contadorCarrito.innerHTML = `0`;
@@ -187,6 +189,8 @@ const calcularCompra = (carrito) =>{
                                 <button class="btn btn-primary m-2" id="eliminarCarrito" type="button">Vaciar Carrito</button>
                                 </div>
                             </div>`
+        const botonEliminarCarrito = document.getElementById("eliminarCarrito");
+        botonEliminarCarrito.onclick = () => eliminarCarrito();  
     }else{
         divCarrito.innerHTML = `
                             <div class="card p- ms-5 mt-1" style="width: 18rem;">
@@ -198,8 +202,6 @@ const calcularCompra = (carrito) =>{
                                 </div>
                             </div>`
     }
-    const botonEliminarCarrito = document.getElementById("eliminarCarrito");
-    botonEliminarCarrito.onclick = () => eliminarCarrito();  
 }
 
 const filtrarRemeras = async () => {
