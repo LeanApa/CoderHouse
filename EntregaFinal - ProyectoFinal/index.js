@@ -48,7 +48,7 @@ const verCarrito = () => {
     resetFiltros.innerHTML="";
     vistaPrincipal.className = "col-6";
 
-    if(carritoLocal !== null){
+    if(carritoLocal !== null && carritoLocal.length !== 0){
         
         
         carritoLocal.forEach(item => {
@@ -70,7 +70,7 @@ const verCarrito = () => {
             boton.onclick = () => eliminarProducto(item.id);
         })        
     }else{
-        let aviso = document.createElement("p");
+        let aviso = document.createElement("h3");
         aviso.innerHTML = "Carrito vacío";
         reset.append(aviso);
     }
