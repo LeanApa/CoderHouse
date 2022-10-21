@@ -49,8 +49,7 @@ const verCarrito = () => {
     vistaPrincipal.className = "col-6";
 
     if(carritoLocal !== null && carritoLocal.length !== 0){
-        
-        
+
         carritoLocal.forEach(item => {
             let contenedor = document.createElement("div");
             contenedor.className = "col-6 p-1"
