@@ -6,6 +6,8 @@ const mostrarProductos = async () => {
     let vistaPrincipal = document.getElementById("vista-principal");
     let contadorCarrito = document.getElementById("contador_carrito");
     let titulo = document.getElementById("titulo");
+    let reset = document.getElementById("productos");
+    reset.innerHTML= "";
     
     vistaPrincipal.className = "col-12";
     const carritoLocal = JSON.parse(localStorage.getItem("carrito"));
@@ -16,8 +18,6 @@ const mostrarProductos = async () => {
 
         let contenedor = document.createElement("div");
         contenedor.className = "col-4 p-1"
-        let producto = document.getElementById("productos");
-        
         contenedor.innerHTML = `<div class="card" style="width: 18rem;">
                                     <div class="card-body">
                                         <img src="${item.img}" class="card-img-top card-img" alt="imagen de producto">
@@ -28,7 +28,7 @@ const mostrarProductos = async () => {
                                     </div>
                                 </div>`;
         
-        producto.appendChild(contenedor);
+        reset.appendChild(contenedor);
         let boton = document.getElementById(`agregar${item.id}`);
         boton.onclick = () => agregarAlCarrito(item.id);
     })
@@ -41,9 +41,11 @@ const verCarrito = () => {
     let vistaPrincipal = document.getElementById("vista-principal");
     let carritoLocal = JSON.parse(localStorage.getItem("carrito"));
     let titulo = document.getElementById("titulo");
+    let resetFiltros = document.getElementById("filtros");
     
     titulo.innerHTML = "Carrito";
     reset.innerHTML= "";
+    resetFiltros.innerHTML="";
     vistaPrincipal.className = "col-6";
 
     if(carritoLocal !== null){
@@ -200,11 +202,145 @@ const calcularCompra = (carrito) =>{
     botonEliminarCarrito.onclick = () => eliminarCarrito();  
 }
 
+const filtrarRemeras = async () => {
+    const response = await fetch("./productos.json");
+    const productos = await response.json();
+    let reset = document.getElementById("productos");
+    reset.innerHTML= "";
+
+    const remeras = productos.filter((item)=> item.categoria === "remera");
+
+    remeras.forEach(item => {
+
+        let contenedor = document.createElement("div");
+        contenedor.className = "col-4 p-1"
+        let producto = document.getElementById("productos");
+        
+        contenedor.innerHTML = `<div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <img src="${item.img}" class="card-img-top card-img" alt="imagen de producto">
+                                        <h5 class="card-title">${item.tipo}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">${item.tipo}</h6>
+                                        <p class="card-text">Precio: ${item.precio}</p>
+                                        <button class="btn btn-primary" id="agregar${item.id}" type="button">Agregar</button>
+                                    </div>
+                                </div>`;
+        
+        producto.appendChild(contenedor);
+        let boton = document.getElementById(`agregar${item.id}`);
+        boton.onclick = () => agregarAlCarrito(item.id);
+    })
+
+}
+
+const filtrarPantalones = async () => {
+    const response = await fetch("./productos.json");
+    const productos = await response.json();
+    let reset = document.getElementById("productos");
+    reset.innerHTML= "";
+
+    const remeras = productos.filter((item)=> item.categoria === "pantalones");
+
+    remeras.forEach(item => {
+
+        let contenedor = document.createElement("div");
+        contenedor.className = "col-4 p-1"
+        let producto = document.getElementById("productos");
+        
+        contenedor.innerHTML = `<div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <img src="${item.img}" class="card-img-top card-img" alt="imagen de producto">
+                                        <h5 class="card-title">${item.tipo}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">${item.tipo}</h6>
+                                        <p class="card-text">Precio: ${item.precio}</p>
+                                        <button class="btn btn-primary" id="agregar${item.id}" type="button">Agregar</button>
+                                    </div>
+                                </div>`;
+        
+        producto.appendChild(contenedor);
+        let boton = document.getElementById(`agregar${item.id}`);
+        boton.onclick = () => agregarAlCarrito(item.id);
+    })
+
+}
+
+const filtrarCalzado = async () => {
+    const response = await fetch("./productos.json");
+    const productos = await response.json();
+    let reset = document.getElementById("productos");
+    reset.innerHTML= "";
+
+    const remeras = productos.filter((item)=> item.categoria === "calzado");
+
+    remeras.forEach(item => {
+
+        let contenedor = document.createElement("div");
+        contenedor.className = "col-4 p-1"
+        let producto = document.getElementById("productos");
+        
+        contenedor.innerHTML = `<div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <img src="${item.img}" class="card-img-top card-img" alt="imagen de producto">
+                                        <h5 class="card-title">${item.tipo}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">${item.tipo}</h6>
+                                        <p class="card-text">Precio: ${item.precio}</p>
+                                        <button class="btn btn-primary" id="agregar${item.id}" type="button">Agregar</button>
+                                    </div>
+                                </div>`;
+        
+        producto.appendChild(contenedor);
+        let boton = document.getElementById(`agregar${item.id}`);
+        boton.onclick = () => agregarAlCarrito(item.id);
+    })
+
+}
+
+const filtrarCamperas = async () => {
+    const response = await fetch("./productos.json");
+    const productos = await response.json();
+    let reset = document.getElementById("productos");
+    reset.innerHTML= "";
+
+    const remeras = productos.filter((item)=> item.categoria === "camperas");
+
+    remeras.forEach(item => {
+
+        let contenedor = document.createElement("div");
+        contenedor.className = "col-4 p-1"
+        let producto = document.getElementById("productos");
+        
+        contenedor.innerHTML = `<div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <img src="${item.img}" class="card-img-top card-img" alt="imagen de producto">
+                                        <h5 class="card-title">${item.tipo}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">${item.tipo}</h6>
+                                        <p class="card-text">Precio: ${item.precio}</p>
+                                        <button class="btn btn-primary" id="agregar${item.id}" type="button">Agregar</button>
+                                    </div>
+                                </div>`;
+        
+        producto.appendChild(contenedor);
+        let boton = document.getElementById(`agregar${item.id}`);
+        boton.onclick = () => agregarAlCarrito(item.id);
+    })
+
+}
+
 /* ---------------------------------------------------------- fin declaración de funciones------------------------------------------------------------------------ */
 let costoCompras = 0;
 const botonCarrito = document.getElementById("botonCarrito");
+const botonRemeras = document.getElementById("botonRemeras");
+const botonPantalones = document.getElementById("botonPantalones");
+const botonCalzado = document.getElementById("botonCalzado");
+const botonCamperas = document.getElementById("botonCamperas");
+const botonTodos = document.getElementById("botonTodos");
 
 mostrarProductos();
 botonCarrito.onclick = () => verCarrito();
+botonRemeras.onclick = () => filtrarRemeras();
+botonPantalones.onclick = () => filtrarPantalones();
+botonCalzado.onclick = () => filtrarCalzado();
+botonCamperas.onclick = () => filtrarCamperas();
+botonTodos.onclick = () => mostrarProductos();
 
 
