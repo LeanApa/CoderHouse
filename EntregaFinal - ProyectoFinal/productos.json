@@ -40,5 +40,26 @@
         "categoria": "calzado",
         "precio":5000,
         "img":"img/crocs.jpg"
+    },
+    {
+        "id":7,
+        "tipo":"Campera Nike",
+        "categoria": "camperas",
+        "precio":9600,
+        "img":"img/campera-nike.jpg"
+    },
+    {
+        "id":8,
+        "tipo":"Campera Puma",
+        "categoria": "camperas",
+        "precio":8000,
+        "img":"img/campera-puma.jpg"
+    },
+    {
+        "id":9,
+        "tipo":"Jean Sweet",
+        "categoria": "pantalones",
+        "precio":4700,
+        "img":"img/jean.jpg"
     }
 ]
